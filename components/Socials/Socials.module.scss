@@ -1,0 +1,52 @@
+$color: white;
+$bg-color: rgba(0, 0, 139, 0.5);
+
+.socials {
+  color: $color;
+  font-size: 20px;
+  margin: 5px;
+
+  span {
+    display: inline-block;
+    margin: 5px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-top: 2px solid $color;
+
+    pair {
+      display: block;
+    }
+
+    li {
+      display: inline-block;
+      margin: 10px 0;
+      width: 125px;
+
+      a {
+        padding: 10px;
+        border-radius: 50px;
+
+        &:hover {
+          background-color: $bg-color;
+        }
+
+        &[aria-disabled] {
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+      }
+
+      &:first-child {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  &:target {
+    box-shadow: 0 0 10px $color;
+  }
+}

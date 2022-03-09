@@ -1,0 +1,67 @@
+@use './variables.module.scss';
+
+.info {
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr inherit 1fr;
+
+  .container {
+    grid-column: 2;
+    max-width: 100ch;
+    text-align: center;
+    margin: 25px;
+  }
+
+  h1 {
+    font-family: Kollektif;
+    text-shadow: 0 0 10px variables.get(bg);
+    margin-bottom: 100px;
+    font-size: 60px;
+  }
+
+  hr {
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, white, transparent);
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+    color: variables.get(accent);
+
+    &:before {
+      background-color: variables.get(accent);
+      content: '';
+      height: 2px;
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.4s ease-in-out;
+      width: 100%;
+    }
+
+    &:hover {
+      &:before {
+        background-color: variables.get(firefly);
+        width: 0;
+      }
+    }
+
+    &:active {
+      color: variables.get(firefly);
+    }
+  }
+
+  .card {
+    margin: 20px;
+    padding: 0 10px;
+    display: inline-block;
+    width: 24ch;
+    vertical-align: top;
+    background-color: variables.get(bg);
+    border-radius: 10px;
+    text-align: start;
+  }
+}

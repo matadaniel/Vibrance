@@ -1,0 +1,21 @@
+@use 'sass:map';
+
+$variables: (
+  'bg': #303443,
+  'accent': #00ffbb,
+  'firefly': #eaf42e,
+  'footerHeight': 146px,
+);
+
+@function get($arg) {
+  @if not map.has-key($variables, $arg) {
+    @error '"#{$arg}" not found in $variables.';
+  }
+  @return map.get($variables, $arg);
+}
+
+:export {
+  @each $key, $value in $variables {
+    #{$key}: $value;
+  }
+}

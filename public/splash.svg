@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="34.052mm" height="33.599mm" version="1.1" viewBox="0 0 34.052 33.599" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient1126" x1="-35.739" x2="92.96" y1="28.134" y2="28.134" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#f00" offset="0"/>
+   <stop stop-color="#5000ff" stop-opacity=".99667" offset="1"/>
+  </linearGradient>
+ </defs>
+ <path transform="matrix(.26458 0 0 .26458 9.456 9.3555)" d="m81.128 75.407c-11.942 10.205-21.219-11.034-36.505-4.1508-15.286 6.8828-18.146 21.913-34.766 20.243-16.62-1.6705-1.4498-23.471-13.368-33.771-11.918-10.301-27.36 9.1058-31.368-6.3991-4.0075-15.505 6.9418-13.864 12.892-29.224 5.9506-15.359-4.62-29.37 5.0507-42.818 9.6707-13.448 23.204 8.8595 38.01 4.0529 14.805-4.8067 7.3351-22.979 22.235-17.77s2.0833 10.142 12.057 22.258c9.9733 12.116 29.661 9.8921 36.039 23.985 6.3779 14.092-8.7128 14.531-11.904 30.652-3.191 16.12 13.569 22.738 1.6272 32.943z" fill="url(#linearGradient1126)" stroke-width="0" vector-effect="non-scaling-stroke" style="-inkscape-stroke:hairline"/>
+</svg>

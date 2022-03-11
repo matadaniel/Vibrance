@@ -42,9 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             },
           },
           background: {
-            image: `linear-gradient(15deg, ${variables.accent + 50}, #00000000 10% 85%, ${
-              variables.accent + 50
-            } 95% 100%)`,
+            image: `linear-gradient(15deg, ${variables.clearAccent}, #00000000 10% 85%, ${variables.clearAccent} 95% 100%)`,
             color: variables.bg,
           },
         }}

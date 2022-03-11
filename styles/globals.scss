@@ -41,6 +41,11 @@
   src: url('/fonts/Montserrat/Montserrat-Bold.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Campground Free Demo';
+  src: url('/fonts/CampgroundFreeDemo-regular.otf');
+}
+
 html,
 body {
   padding: 0;

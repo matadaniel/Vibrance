@@ -1,18 +1,22 @@
 import '../styles/globals.scss'
-import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import Particles from 'react-tsparticles'
+import Links from '../components/Links'
+import Header from '../components/Header'
+import Toasts from '../components/Toasts'
 import Socials from '../components/Socials'
+import Particles from 'react-tsparticles'
 import variables from '../styles/variables.module.scss'
+import { EvmProvider } from '../context/evmContext'
+import { ToastProvider } from '../context/toastContext'
+import type { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Project Vibrance</title>
-        <meta name="description" content="The most open NFT marketplace" />
         <link rel="icon" href="/splash.svg" />
       </Head>
+
       <Particles
         options={{
           fullScreen: {
@@ -56,15 +60,22 @@ function MyApp({ Component, pageProps }: AppProps) {
           overflow: 'hidden',
         }}
       >
-        <Component {...pageProps} />
+        <ToastProvider>
+          <EvmProvider>
+            <Header />
+            <Component {...pageProps} />
+            <Toasts />
+          </EvmProvider>
+        </ToastProvider>
         <footer
           style={{
             position: 'absolute',
-            display: 'inline-flex',
+            display: 'flex',
             bottom: 0,
             width: '100%',
           }}
         >
+          <Links />
           <Socials />
         </footer>
       </div>

@@ -1,0 +1,79 @@
+@use 'sass:color';
+@use '../../styles/variables.module.scss';
+
+.container {
+  height: 77px;
+
+  .input {
+    position: relative;
+    max-width: 360px;
+    border-radius: 3px;
+    padding: 0 0.5rem;
+    background: color.scale(variables.get(bg), $lightness: 10%);
+    overflow: hidden;
+    top: 100%;
+    transform: translateY(-100%);
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      background: linear-gradient(
+        to right,
+        rgba(variables.get(firefly), 0.5),
+        variables.get(clearAccent),
+        rgba(blueviolet, 0.5),
+        variables.get(clearAccent),
+        rgba(variables.get(firefly), 0.5),
+        variables.get(clearAccent)
+      );
+      background-size: 500% auto;
+      animation: gradient 5s linear infinite;
+    }
+
+    $height: 3rem;
+    input {
+      font-family: inherit;
+      font-size: x-large;
+      line-height: $height;
+      color: white;
+      border-style: none;
+      background: transparent;
+      outline: none;
+
+      &::placeholder {
+        color: color.scale(white, $lightness: -25%);
+      }
+    }
+
+    .error {
+      display: inline-block;
+      color: variables.get(error);
+      margin-top: 0.5rem;
+      animation: reveal 0.4s;
+
+      @keyframes reveal {
+        0% {
+          transform: translateY(calc($height/2));
+        }
+        100% {
+          transform: none;
+        }
+      }
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0;
+      }
+      100% {
+        background-position: 100% 0;
+      }
+    }
+  }
+}

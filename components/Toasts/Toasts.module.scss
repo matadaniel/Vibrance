@@ -1,0 +1,86 @@
+@use 'sass:color';
+@use '../../styles/variables.module.scss';
+
+.container {
+  position: fixed;
+  top: 85px;
+  right: 15px;
+  z-index: 1;
+  width: min-content;
+
+  @mixin toast($color) {
+    width: max-content;
+    float: right;
+    max-width: 360px;
+    padding: 5px 13px 5px 10px;
+    margin-bottom: 5px;
+    font-size: large;
+    border-radius: 15px;
+    border: solid $color 2px;
+    background-color: color.scale($color, $lightness: -60%);
+    animation: enter 1s;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    svg {
+      color: $color;
+      margin-right: 2px;
+      vertical-align: middle;
+    }
+
+    .bar {
+      width: 100%;
+      height: 4px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: $color;
+      animation: progress 5s linear forwards;
+
+      @keyframes progress {
+        to {
+          width: 0;
+        }
+      }
+    }
+
+    @keyframes enter {
+      from {
+        transform: translateY(250px);
+      }
+    }
+
+    @media only screen and (max-width: 375px) {
+      max-width: calc(100vw - 2px);
+      padding: 5px 8px 5px 5px;
+    }
+  }
+
+  .pending {
+    @include toast(color.scale(variables.get(bg), $lightness: 55%));
+
+    svg {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  }
+
+  .success {
+    @include toast(variables.get(accent));
+  }
+
+  .error {
+    @include toast(variables.get(error));
+  }
+
+  @media only screen and (max-width: 375px) {
+    right: 2px;
+  }
+}

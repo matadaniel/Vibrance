@@ -3,9 +3,10 @@
 $variables: (
   'bg': #303443,
   'accent': #00ffbb,
-  'clearAccent': #00ffbb50,
+  'clearAccent': #00ffbb80,
   'firefly': #eaf42e,
-  'footerHeight': 146px,
+  'footerHeight': 216px,
+  'error': rgb(255, 100, 100),
 );
 
 @function get($arg) {

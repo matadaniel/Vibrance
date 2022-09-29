@@ -1,0 +1,49 @@
+@use '../../styles/variables.module.scss';
+
+.header {
+  margin-bottom: 75px;
+  text-align: end;
+
+  .offline {
+    text-align: center;
+    font-size: large;
+    background-color: variables.get(error);
+  }
+
+  .home {
+    font-size: 20px;
+    padding: 5px;
+    margin: 15px;
+    border-bottom: 2px solid rgba(white, 0.25);
+    transition: border-bottom-color 0.75s;
+    float: left;
+
+    &:hover {
+      border-bottom-color: white;
+    }
+
+    span {
+      margin-left: 3px;
+    }
+
+    @media only screen and (max-width: 460px) {
+      span {
+        display: none;
+      }
+    }
+  }
+
+  a {
+    position: relative;
+
+    .balance {
+      position: absolute;
+      top: 21px;
+      right: 10px;
+      border-right: solid #00ffbb80 1px;
+      border-bottom: solid #00ffbb80 1px;
+      border-bottom-right-radius: 10px;
+      padding: 14px 10px 2px;
+    }
+  }
+}

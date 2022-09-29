@@ -1,0 +1,21 @@
+@use '../components/Card/Card.module.scss';
+$pad: 100px;
+
+.grid {
+  padding: $pad;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 750px) 1fr;
+
+  .container {
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(Card.$width, 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: calc(Card.$gap + 30px);
+  }
+
+  @media only screen and (max-width: calc(Card.$width + $pad * 2)) {
+    padding: 0;
+  }
+}

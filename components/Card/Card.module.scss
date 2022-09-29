@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use '../../styles/variables.module.scss';
+$width: 300px;
+$gap: 3rem;
+
+.card {
+  backdrop-filter: blur(5px);
+  border: solid variables.get(clearAccent) 1px;
+  border-radius: 10px;
+  color: gold;
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5), 0px -1px 0px rgba(0, 0, 0, 0.5);
+  font-size: larger;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  text-align: center;
+  width: $width;
+  height: $width;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+
+  .bundle {
+    position: relative;
+  }
+
+  .left,
+  .right {
+    position: absolute;
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.1;
+    transition: opacity 0.5s;
+    top: calc(50% - 20px);
+  }
+
+  .left {
+    transform: rotate(-90deg);
+    left: -25%;
+  }
+
+  .right {
+    transform: rotate(90deg);
+    right: -25%;
+  }
+
+  &:hover {
+    .left,
+    .right {
+      opacity: 0.8;
+    }
+  }
+
+  .medium {
+    font-size: medium;
+    margin: 0;
+  }
+
+  .ribbon {
+    width: 90px;
+    height: 120px;
+    overflow: hidden;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: -1;
+      content: '';
+      display: block;
+      border: 5px solid color.adjust(variables.get(accent), $lightness: -20%);
+      border-top-color: transparent;
+      border-right-color: transparent;
+    }
+
+    &::before {
+      top: 0;
+      left: 0px;
+    }
+
+    &::after {
+      bottom: 30px;
+      right: 0;
+    }
+
+    span {
+      position: absolute;
+      width: 150px;
+      padding: 5px;
+      background-color: variables.get(accent);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      color: #000;
+      font-size: 15px;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      right: -40px;
+      top: 20px;
+      transform: rotate(45deg);
+    }
+  }
+
+  p {
+    margin: 5px 0 !important;
+    font-size: x-large;
+  }
+}
+
+:export {
+  firefly: variables.get(firefly);
+}

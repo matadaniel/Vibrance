@@ -1,0 +1,97 @@
+@use '../../styles/variables.module.scss';
+@use 'sass:color';
+
+.info {
+  padding-left: 25px;
+
+  hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(15deg, variables.get(accent), transparent);
+  }
+
+  .price {
+    font-size: x-large;
+    font-family: Kollektif;
+    margin: 1rem 0;
+    font-weight: bold;
+
+    p {
+      font-size: medium;
+      text-align: right;
+      white-space: nowrap;
+      margin: 8px 0;
+    }
+
+    .right {
+      float: right;
+      cursor: pointer;
+    }
+
+    .rotate {
+      animation: rotate 2s linear infinite;
+      cursor: inherit;
+      color: color.scale(white, $lightness: -25%);
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  .modalBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: hwb(0 0% 100% / 0.75);
+  }
+
+  .modal {
+    position: fixed;
+    top: 140px;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    background-color: variables.get(bg);
+    border: 5px solid variables.get(accent);
+    border-radius: 25px;
+    padding: 25px;
+
+    .spacer {
+      position: relative;
+      width: 100%;
+      height: 30px;
+
+      button {
+        position: absolute;
+        right: 0;
+        font-size: 30px;
+        border: none;
+        background: none;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .submit {
+    text-align: center;
+    margin: 20px;
+    margin-bottom: 0;
+
+    .warning {
+      color: gold;
+      background-color: variables.get(bg);
+      padding: 1em 0;
+      border-radius: 10px;
+    }
+  }
+}

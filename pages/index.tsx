@@ -1,72 +1,96 @@
-import type { NextPage } from 'next'
+import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../styles/About.module.scss'
-import Logo from '../components/Logo'
+import Button from '../components/Button'
+import styles from '../styles/Home.module.scss'
+import Listings from '../components/Listings'
+import AuctionHouse from '../components/AuctionHouse'
+import { Gallery, UserGallery } from '../typechain-types'
+import { Contract, getDefaultProvider } from 'ethers'
+import { getBundles, getContractInfo, getListings, verifyNet } from '../helpers'
+import type { GetServerSideProps, NextPage } from 'next'
 
-const About: NextPage = () => {
+interface Bundle {
+  bundleNumber: number
+  tokens: Array<Token>
+  donation: { roses: number; tulips: number }
+}
+
+interface HomeProps {
+  timestamp: number
+  upcoming: Array<Bundle>
+  bundles: Array<Bundle & { highestBid: string }>
+  expired: Array<Bundle>
+  ending: number
+  listings: Array<[string, { name: string; address: string; token: Token; price: string }]>
+}
+
+const Home: NextPage<HomeProps> = ({ timestamp, upcoming, bundles, expired, ending, listings }) => {
   return (
-    <div className={styles.info}>
-      <div className={styles.container}>
-        <Logo size={5} />
-        <h1>The most open NFT marketplace</h1>
-        <div className={styles.card}>
-          <h2>Low Fees</h2>
-          <hr />
-          <p>
-            NFTs should not be reserved for only the wealthy. Transaction fees on
-            <i> this network </i>allow anyone to mint, buy, and list their NFTs.
-          </p>
-        </div>
+    <div className={styles.container}>
+      <Head>
+        <title>Project Vibrance</title>
+        <meta
+          name="description"
+          content="The most open NFT marketplace. Buy and sell digital assets with low fees. Join our community."
+        />
+      </Head>
 
-        <div className={styles.card}>
-          <h2>ERC2981</h2>
-          <hr />
-          <p>
-            The Vibrance marketplace and NFTs created on Vibrance are ERC2981 compliant. Creators
-            are able sell their NFTs and receive royalties on any marketplace that supports this
-            standard.
-          </p>
+      <div className={styles.main}>
+        <div className={styles.create}>
+          <Link href="/sell">
+            <a>
+              <Button>Sell your own NFT</Button>
+            </a>
+          </Link>
         </div>
-
-        <div className={styles.card}>
-          <h2>FOSS</h2>
-          <hr />
-          <p>
-            The source code for this marketplace is completely open source and can be found on{' '}
-            <Link href="https://github.com/AlisaKiromen/Vibrance">GitHub</Link>. Everyone is welcome
-            to read over the code and provide feedback.
-          </p>
-        </div>
-
-        <div className={styles.card}>
-          <h2>Ease of Use</h2>
-          <hr />
-          <p>
-            All of theses acronyms can get confusing. Vibrance strives to make the user experience
-            with NFTs as intuitive as possible.
-          </p>
-        </div>
-
-        <div className={styles.card}>
-          <h2>Free Market</h2>
-          <hr />
-          <p>
-            Anyone with an internet connection is free to participate in this platform. Create, buy,
-            and sell at any time.
-          </p>
-        </div>
-
-        <div className={styles.card}>
-          <h2>Community</h2>
-          <hr />
-          <p>
-            Vibrance is built to deliver the best experience for the community.{' '}
-            <a href="#Socials">Join</a> the converation and help shape the future of the NFT space!
-          </p>
-        </div>
+        <Listings providerListings={new Map(listings)} />
+        <AuctionHouse
+          providerTimestamp={timestamp}
+          providerUpcoming={upcoming}
+          providerBundles={bundles}
+          providerExpired={expired}
+          providerEnding={ending}
+        />
       </div>
     </div>
   )
 }
 
-export default About
+export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
+  try {
+    const provider = getDefaultProvider(process.env.NETWORK)
+
+    const { chainId } = await provider.getNetwork()
+
+    verifyNet(chainId)
+
+    const gallery = new Contract(...(await getContractInfo('Gallery', provider))) as Gallery
+    const userGallery = new Contract(
+      ...(await getContractInfo('UserGallery', provider))
+    ) as UserGallery
+
+    return {
+      props: {
+        ...(await getBundles(gallery)),
+        listings: [
+          ...(await getListings(userGallery, (await provider.getBlockNumber()) - 100)).listings,
+        ],
+      },
+    }
+  } catch (err) {
+    console.error(err)
+
+    return {
+      props: {
+        timestamp: 0,
+        upcoming: [],
+        bundles: [],
+        expired: [],
+        ending: -1,
+        listings: [],
+      },
+    }
+  }
+}
+
+export default Home

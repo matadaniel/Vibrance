@@ -1,0 +1,66 @@
+@use '../Card/Card.module.scss';
+
+.auction {
+  h1 {
+    font-size: 64px;
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  p {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .load {
+    text-align: center;
+    position: relative;
+    top: calc(-110px + Card.$gap);
+  }
+
+  .gallery {
+    display: grid;
+    gap: Card.$gap;
+    grid-template-columns: repeat(auto-fill, minmax(Card.$width, 1fr));
+    justify-items: center;
+    margin: 110px 0;
+
+    .name {
+      font-size: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-style: italic;
+      max-width: Card.$width;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .info {
+      font-size: x-large;
+      line-height: 86px;
+      width: Card.$width;
+      height: 86px;
+
+      .link {
+        float: right;
+        text-align: center;
+        line-height: normal;
+        backdrop-filter: blur(5px);
+        border: solid #00ffbb66 1px;
+        box-shadow: 0 0 10px #00ffbb80;
+        border-radius: 10px;
+        color: white;
+        font-size: 20px;
+        padding: 10px;
+        margin: 20px 0;
+        width: 180px;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+@use '../../styles/variables.module.scss';
+@use '../Card/Card.module.scss';
+
+.container {
+  text-align: center;
+
+  h1,
+  h2 {
+    font-family: Kollektif;
+    text-shadow: 0 0 10px variables.get(bg);
+    word-wrap: break-word;
+  }
+
+  form {
+    display: inline-block;
+
+    .button {
+      margin-top: 9px;
+    }
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr minmax(0, calc(Card.$width * 5 + Card.$gap * 4)) 1fr;
+
+    .listings {
+      grid-column: 2;
+      display: grid;
+      gap: Card.$gap;
+      grid-template-columns: repeat(auto-fill, minmax(Card.$width, 1fr));
+      text-align: center;
+      justify-items: center;
+      margin: 0 25px 25px;
+    }
+  }
+}

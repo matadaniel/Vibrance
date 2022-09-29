@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 360px) 1fr;
+  margin: 100px;
+
+  .container {
+    grid-column: 2;
+  }
+
+  @media only screen and (max-width: 560px) {
+    margin: 0 10px;
+  }
+}

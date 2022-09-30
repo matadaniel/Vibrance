@@ -42,8 +42,7 @@ node_modules
 coverage
 coverage.json
 typechain-types
-.openzeppelin
-deployments
+.openzeppelin/unknown-*.json
 
 #Hardhat files
 cache
